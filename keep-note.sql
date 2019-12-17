@@ -40,7 +40,7 @@ SET SQL_SAFE_UPDATES=0;
 UPDATE Note set note_content='Learn Java in 4 Weeks' where note_id=11;
 DELIMITER $$
 CREATE TRIGGER Delete_All_Note
-BEFORE DELETE ON Note
+AFTER DELETE ON Note
 FOR EACH ROW
 BEGIN
 DELETE FROM UserNote WHERE note_id=old.note_id;
@@ -52,10 +52,10 @@ DELETE FROM Note where note_id=11;
 select * from note;
 DELIMITER $$
 CREATE TRIGGER Delete_All_User
-BEFORE DELETE ON User
+AFTER DELETE ON User
 FOR EACH ROW
 BEGIN
-DELETE FROM Note WHERE old.user_id=note_id;
+DELETE FROM Note WHERE note_id=old.user_id;
 END$$
 DELIMITER ;
 DELETE FROM User where user_id='12';
