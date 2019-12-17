@@ -1,8 +1,8 @@
 CREATE TABLE User(user_id VARCHAR(20) primary key, user_name VARCHAR(20), user_added_date DATE, user_password VARCHAR(20), user_mobile BIGINT(10));
 CREATE TABLE Note(note_id VARCHAR(20) primary key, note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATE);
-CREATE TABLE Category(category_id VARCHAR(20) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATE, category_creator VARCHAR(20));
+CREATE TABLE Category(category_id INT(3) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATE, category_creator VARCHAR(20));
 CREATE TABLE Reminder(reminder_id VARCHAR(20) primary key, reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATE, reminder_creator VARCHAR(20));
-CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id VARCHAR(20), category_id VARCHAR(20),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
+CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id VARCHAR(20), category_id INT(3),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
 CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id VARCHAR(20), reminder_id VARCHAR(20),
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
 CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id INT(3),
@@ -11,8 +11,8 @@ INSERT INTO User VALUES('11','amit','2019-12-16','P@ssword',8976191225);
 INSERT INTO User VALUES('12','Sumit','2019-12-16','P@ssword',8976191297);
 INSERT INTO Note VALUES('11','JAVA','Learn Java in 2 Weeks','In Progress','2019-12-16');
 INSERT INTO Note VALUES('12','ASP','Learn ASP in 2 Weeks','In Progress','2019-12-17');
-INSERT INTO Category VALUES('11','Language','Programming Language','2019-12-16','Amit');
-INSERT INTO Category VALUES('12','Literature','Literature Language','2019-12-16','Sumit');
+INSERT INTO Category VALUES(11,'Language','Programming Language','2019-12-16','Amit');
+INSERT INTO Category VALUES(12,'Literature','Literature Language','2019-12-16','Sumit');
 INSERT INTO Reminder VALUES('11','Meeting','Team Meeting','Urgent','2019-12-16','Amit');
 INSERT INTO Reminder VALUES('12','Outing','Team Outing','Urgent','2019-12-18','Sumit');
 INSERT INTO Notecategory VALUES('11','11','11');
@@ -60,4 +60,4 @@ END$$
 DELIMITER ;
 DELETE FROM User where user_id='12';
 DELETE FROM Note WHERE note_id IN (SELECT note_id from UserNote where user_id='11');
-DELETE FROM Note WHERE note_id IN (SELECT note_id from NoteCategory where category_id='11');
+DELETE FROM Note WHERE note_id IN (SELECT note_id from NoteCategory where category_id=11);
