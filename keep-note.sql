@@ -5,8 +5,8 @@ CREATE TABLE Reminder(reminder_id VARCHAR(20) primary key, reminder_name VARCHAR
 CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id VARCHAR(20), category_id VARCHAR(20),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
 CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id VARCHAR(20), reminder_id VARCHAR(20),
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
-CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id VARCHAR(20),
-CONSTRAINT UserNote_usernote_id_pk PRIMARY KEY(usernote_id));
+CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id INT(3),
+CONSTRAINT UserNote_usernote_id_pk PRIMARY KEY(usernote_id),CONSTRAINT UserNote_user_id_fk FOREIGN KEY(user_id) REFERENCES User(user_id) on delete cascade);
 INSERT INTO User VALUES('11','amit','2019-12-16','P@ssword',8976191225);
 INSERT INTO User VALUES('12','Sumit','2019-12-16','P@ssword',8976191297);
 INSERT INTO Note VALUES('11','JAVA','Learn Java in 2 Weeks','In Progress','2019-12-16');
@@ -19,11 +19,11 @@ INSERT INTO Notecategory VALUES('11','11','11');
 INSERT INTO Notecategory VALUES('12','12','12');
 INSERT INTO NoteReminder VALUES('11','11','11');
 INSERT INTO NoteReminder VALUES('12','12','12');
-INSERT INTO UserNote VALUES(11,'11','11');
-INSERT INTO UserNote VALUES(12,'12','12');
-INSERT INTO UserNote VALUES(13,'11','11');
+INSERT INTO UserNote VALUES(11,'11',11);
+INSERT INTO UserNote VALUES(12,'12',12);
+INSERT INTO UserNote VALUES(13,'11',11);
 INSERT INTO Note VALUES('13','ASP','Learn ASP in 2 Weeks','In Progress','2019-12-16');
-INSERT INTO UserNote VALUES(14,'12','13');
+INSERT INTO UserNote VALUES(14,'12',13);
 INSERT INTO Note VALUES('14','JAVA','Learn JAVA in 2 Weeks','Done','2019-12-16');
 INSERT INTO Notecategory VALUES('13','14','12');
 INSERT INTO Reminder VALUES('13','Meeting','Team Meeting','Urgent','2019-12-16','Amit');
