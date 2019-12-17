@@ -1,10 +1,12 @@
-CREATE TABLE User(user_id VARCHAR(20), user_name VARCHAR(20), user_added_date DATE, user_password VARCHAR(20), user_mobile BIGINT(10));
-CREATE TABLE Note(note_id VARCHAR(20), note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATE);
-CREATE TABLE Category(category_id VARCHAR(20), category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATE, category_creator VARCHAR(20));
-CREATE TABLE Reminder(reminder_id VARCHAR(20), reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATE, reminder_creator VARCHAR(20));
-CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id VARCHAR(20), category_id VARCHAR(20));
-CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id VARCHAR(20), reminder_id INT(2));
-CREATE TABLE UserNote(usernote_id VARCHAR(20), user_id VARCHAR(20), note_id VARCHAR(20));
+CREATE TABLE User(user_id VARCHAR(20) primary key, user_name VARCHAR(20), user_added_date DATE, user_password VARCHAR(20), user_mobile BIGINT(10));
+CREATE TABLE Note(note_id VARCHAR(20) primary key, note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATE);
+CREATE TABLE Category(category_id VARCHAR(20) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATE, category_creator VARCHAR(20));
+CREATE TABLE Reminder(reminder_id VARCHAR(20) primary key, reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATE, reminder_creator VARCHAR(20));
+CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id VARCHAR(20), category_id VARCHAR(20),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
+CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id VARCHAR(20), reminder_id VARCHAR(20),
+CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
+CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id VARCHAR(20),
+CONSTRAINT UserNote_usernote_id_pk PRIMARY KEY(usernote_id));
 INSERT INTO User VALUES('11','amit','2019-12-16','P@ssword',8976191225);
 INSERT INTO User VALUES('12','Sumit','2019-12-16','P@ssword',8976191297);
 INSERT INTO Note VALUES('11','JAVA','Learn Java in 2 Weeks','In Progress','2019-12-16');
@@ -17,11 +19,11 @@ INSERT INTO Notecategory VALUES('11','11','11');
 INSERT INTO Notecategory VALUES('12','12','12');
 INSERT INTO NoteReminder VALUES('11','11','11');
 INSERT INTO NoteReminder VALUES('12','12','12');
-INSERT INTO UserNote VALUES('11','11','11');
-INSERT INTO UserNote VALUES('12','12','12');
-INSERT INTO UserNote VALUES('13','11','11');
+INSERT INTO UserNote VALUES(11,'11','11');
+INSERT INTO UserNote VALUES(12,'12','12');
+INSERT INTO UserNote VALUES(13,'11','11');
 INSERT INTO Note VALUES('13','ASP','Learn ASP in 2 Weeks','In Progress','2019-12-16');
-INSERT INTO UserNote VALUES('14','12','13');
+INSERT INTO UserNote VALUES(14,'12','13');
 INSERT INTO Note VALUES('14','JAVA','Learn JAVA in 2 Weeks','Done','2019-12-16');
 INSERT INTO Notecategory VALUES('13','14','12');
 INSERT INTO Reminder VALUES('13','Meeting','Team Meeting','Urgent','2019-12-16','Amit');
@@ -41,12 +43,13 @@ CREATE TRIGGER Delete_All_Note
 AFTER DELETE ON Note
 FOR EACH ROW
 BEGIN
-DELETE FROM UserNote WHERE old.note_id=note_id;
-DELETE FROM NoteReminder WHERE old.note_id=note_id;
-DELETE FROM NoteCategory WHERE old.note_id=note_id;
+DELETE FROM UserNote WHERE note_id=old.note_id;
+DELETE FROM NoteReminder WHERE note_id=old.note_id;
+DELETE FROM NoteCategory WHERE note_id=old.note_id;
 END$$
 DELIMITER ;
 DELETE FROM Note where note_id='11';
+select * from note;
 DELIMITER $$
 CREATE TRIGGER Delete_All_User
 BEFORE DELETE ON User
