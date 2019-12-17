@@ -2,7 +2,7 @@ CREATE TABLE User(user_id VARCHAR(20) primary key, user_name VARCHAR(20), user_a
 CREATE TABLE Note(note_id INT(3) primary key, note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATETIME);
 CREATE TABLE Category(category_id INT(3) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATETIME, category_creator VARCHAR(20));
 CREATE TABLE Reminder(reminder_id VARCHAR(20) primary key, reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATETIME, reminder_creator VARCHAR(20));
-CREATE TABLE NoteCategory(notecategory_id VARCHAR(20), note_id INT(3), category_id INT(3),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
+CREATE TABLE NoteCategory(notecategory_id INT(3), note_id INT(3), category_id INT(3),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
 CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id INT(3), reminder_id VARCHAR(20),
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
 CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id INT(3),
@@ -15,8 +15,8 @@ INSERT INTO Category VALUES(11,'Language','Programming Language','2019-12-16 10:
 INSERT INTO Category VALUES(12,'Literature','Literature Language','2019-12-16 10:10:10','Sumit');
 INSERT INTO Reminder VALUES('11','Meeting','Team Meeting','Urgent','2019-12-16 10:10:10','Amit');
 INSERT INTO Reminder VALUES('12','Outing','Team Outing','Urgent','2019-12-16 10:10:10','Sumit');
-INSERT INTO Notecategory VALUES('11',11,11);
-INSERT INTO Notecategory VALUES('12',12,12);
+INSERT INTO Notecategory VALUES(11,11,11);
+INSERT INTO Notecategory VALUES(12,12,12);
 INSERT INTO NoteReminder VALUES('11',11,'11');
 INSERT INTO NoteReminder VALUES('12',12,'12');
 INSERT INTO UserNote VALUES(11,'11',11);
@@ -25,7 +25,7 @@ INSERT INTO UserNote VALUES(13,'11',11);
 INSERT INTO Note VALUES(13,'ASP','Learn ASP in 2 Weeks','In Progress','2019-12-16 10:10:10');
 INSERT INTO UserNote VALUES(14,'12',13);
 INSERT INTO Note VALUES(14,'JAVA','Learn JAVA in 2 Weeks','Done','2019-12-16 10:10:10');
-INSERT INTO Notecategory VALUES('13',14,12);
+INSERT INTO Notecategory VALUES(13,14,12);
 INSERT INTO Reminder VALUES('13','Meeting','Team Meeting','Urgent','2019-12-16 10:10:10','Amit');
 INSERT INTO NoteReminder VALUES('13',14,'12');
 SELECT r.reminder_id, reminder_name, reminder_descr, reminder_type, reminder_creation_date, reminder_creator FROM Reminder r JOIN NoteReminder nr ON nr.reminder_id=r.reminder_id;
