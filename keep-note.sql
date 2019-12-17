@@ -1,4 +1,4 @@
-CREATE TABLE User(user_id VARCHAR(20) primary key, user_name VARCHAR(20), user_added_date DATETIME, user_password VARCHAR(20), user_mobile BIGINT(10));
+CREATE TABLE User(user_id VARCHAR(20) primary key, user_name VARCHAR(20), user_added_date DATETIME, user_password VARCHAR(20), user_mobile VARCHAR(20));
 CREATE TABLE Note(note_id INT(3) primary key, note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATETIME);
 CREATE TABLE Category(category_id INT(3) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATETIME, category_creator VARCHAR(20));
 CREATE TABLE Reminder(reminder_id VARCHAR(20) primary key, reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATETIME, reminder_creator VARCHAR(20));
@@ -7,8 +7,8 @@ CREATE TABLE NoteReminder(notereminder_id VARCHAR(20), note_id INT(3), reminder_
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
 CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20), note_id INT(3),
 CONSTRAINT UserNote_usernote_id_pk PRIMARY KEY(usernote_id),CONSTRAINT UserNote_user_id_fk FOREIGN KEY(user_id) REFERENCES User(user_id) on delete cascade);
-INSERT INTO User VALUES('11','amit','2019-12-16 10:10:10','P@ssword',8976191225);
-INSERT INTO User VALUES('12','Sumit','2019-12-16 10:10:10','P@ssword',8976191297);
+INSERT INTO User VALUES('11','amit','2019-12-16 10:10:10','P@ssword','8976191225');
+INSERT INTO User VALUES('12','Sumit','2019-12-16 10:10:10','P@ssword','8976191297');
 INSERT INTO Note VALUES(11,'JAVA','Learn Java in 2 Weeks','In Progress','2019-12-16 10:10:10');
 INSERT INTO Note VALUES(12,'ASP','Learn ASP in 2 Weeks','In Progress','2019-12-16 10:10:10');
 INSERT INTO Category VALUES(11,'Language','Programming Language','2019-12-16 10:10:10','Amit');
