@@ -5,7 +5,7 @@ CREATE TABLE Reminder(reminder_id INT(3) primary key, reminder_name VARCHAR(20),
 CREATE TABLE NoteCategory(notecategory_id INT(3), note_id INT(3), category_id INT(3),CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
 CREATE TABLE NoteReminder(notereminder_id INT(3), note_id INT(3), reminder_id INT(3),
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
-CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20) not null, note_id INT(3),
+CREATE TABLE UserNote(usernote_id INT(3), user_id VARCHAR(20) not null, note_id INT(3) not null,
 CONSTRAINT UserNote_usernote_id_pk PRIMARY KEY(usernote_id));
 INSERT INTO User VALUES('11','amit','2019-12-16 10:10:10','P@ssword','8976191225');
 INSERT INTO User VALUES('12','Sumit','2019-12-16 10:10:10','P@ssword','8976191297');
