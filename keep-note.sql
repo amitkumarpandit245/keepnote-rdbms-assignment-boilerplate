@@ -1,4 +1,4 @@
-CREATE TABLE User(user_id VARCHAR(20) not null, user_name VARCHAR(20), user_added_date DATETIME, user_password VARCHAR(20), user_mobile VARCHAR(20));
+CREATE TABLE User(user_id VARCHAR(20), user_name VARCHAR(20) not null, user_added_date DATETIME not null, user_password VARCHAR(20) not null, user_mobile VARCHAR(20),PRIMARY KEY (user_id));
 CREATE TABLE Note(note_id INT(3) primary key, note_title VARCHAR(20), note_content VARCHAR(50), note_status VARCHAR(20), note_creation_date DATETIME);
 CREATE TABLE Category(category_id INT(3) primary key, category_name VARCHAR(20), category_descr VARCHAR(20), category_creation_date DATETIME, category_creator VARCHAR(20));
 CREATE TABLE Reminder(reminder_id INT(3) primary key, reminder_name VARCHAR(20), reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATETIME, reminder_creator VARCHAR(20));
@@ -43,9 +43,9 @@ CREATE TRIGGER Delete_All_Note
 BEFORE DELETE ON Note
 FOR EACH ROW
 BEGIN
-DELETE FROM UserNote WHERE note_id=old.note_id;
-DELETE FROM NoteReminder WHERE note_id=old.note_id;
-DELETE FROM NoteCategory WHERE note_id=old.note_id;
+DELETE un FROM UserNote WHERE un.note_id=old.note_id;
+DELETE nr FROM NoteReminder WHERE nr.note_id=old.note_id;
+DELETE nc FROM NoteCategory WHERE nc.note_id=old.note_id;
 END$$
 DELIMITER ;
 DELETE FROM Note where note_id=11;
@@ -55,7 +55,7 @@ CREATE TRIGGER Delete_All_User
 BEFORE DELETE ON User
 FOR EACH ROW
 BEGIN
-DELETE FROM Note WHERE note_id=old.user_id;
+DELETE un FROM UserNote WHERE un.user_id=old.user_id;
 END$$
 DELIMITER ;
 DELETE FROM User where user_id='12';
