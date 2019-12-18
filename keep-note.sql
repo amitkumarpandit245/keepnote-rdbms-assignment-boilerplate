@@ -1,7 +1,7 @@
 CREATE TABLE User(user_id VARCHAR(20), user_name VARCHAR(20) not null, user_added_date DATETIME not null, user_password VARCHAR(20) not null, user_mobile VARCHAR(20),PRIMARY KEY (user_id));
 CREATE TABLE Note(note_id INT(3) primary key, note_title VARCHAR(20) not null, note_content VARCHAR(50) , note_status VARCHAR(20) not null, note_creation_date DATETIME not null);
 CREATE TABLE Category(category_id INT(3) primary key, category_name VARCHAR(20) not null, category_descr VARCHAR(20), category_creation_date DATETIME not null, category_creator VARCHAR(20) not null);
-CREATE TABLE Reminder(reminder_id INT(3) primary key, reminder_name VARCHAR(20) not null, reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATETIME not null, reminder_creator VARCHAR(20));
+CREATE TABLE Reminder(reminder_id INT(3) primary key, reminder_name VARCHAR(20) not null, reminder_descr VARCHAR(20), reminder_type VARCHAR(20), reminder_creation_date DATETIME not null, reminder_creator VARCHAR(20) not null);
 CREATE TABLE NoteCategory(notecategory_id INT(3), note_id INT(3) not null, category_id INT(3) not null ,CONSTRAINT NoteCategory_notecategory_id PRIMARY KEY(notecategory_id));
 CREATE TABLE NoteReminder(notereminder_id INT(3), note_id INT(3) not null, reminder_id INT(3) not null,
 CONSTRAINT NoteReminder_notereminder_id_pk PRIMARY KEY(notereminder_id));
